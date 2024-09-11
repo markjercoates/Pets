@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace Pets.Application.Interfaces;
 public interface IPetRepository : IGenericRepository<Pet>   
 {
+    //public Task<Pet?> GetByIdAsync(int id, CancellationToken token = default);
 }

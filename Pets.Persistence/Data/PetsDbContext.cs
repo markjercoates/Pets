@@ -43,6 +43,7 @@ public class PetsDbContext : IdentityDbContext<AppUser>
         builder.Entity<PetType>()
             .HasMany(pt => pt.Pets)
             .WithOne(p => p.PetType)
+            .HasPrincipalKey(pt => pt.Id)
             .HasForeignKey(p => p.PetTypeId);
 
         builder.Entity<PetType>()
@@ -50,28 +51,27 @@ public class PetsDbContext : IdentityDbContext<AppUser>
             .HasMaxLength(50);
 
         builder.Entity<PetType>()
-            .Property(pt => pt.Id).ValueGeneratedNever();
+            .HasKey(pt => pt.Id);
 
-        //builder.Entity<IdentityRole>().HasData(
-        //  new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "ADMIN" },
-        //  new IdentityRole { Id = Guid.NewGuid().ToString(), Name = "User", NormalizedName = "USER" }
-        //  );
-
-        //// 1 = Cat, 2 = Dog, 3 = Hamster, 4 = Bird, 5 = Rabbit, 6 = Fish, 7 = Lizard, 8 = Horse, 9 = Gerbil, 10 = Tortoise
-        //builder.Entity<PetType>().HasData(
-        //    new PetType { Id = 1, Name = "Cat" },
-        //    new PetType { Id = 2, Name = "Dog" },
-        //    new PetType { Id = 3, Name = "Hamster" },
-        //    new PetType { Id = 4, Name = "Bird" },
-        //    new PetType { Id = 5, Name = "Rabbit" },
-        //    new PetType { Id = 6, Name = "Fish" },
-        //    new PetType { Id = 7, Name = "Lizard" },
-        //    new PetType { Id = 8, Name = "Horse" },
-        //    new PetType { Id = 9, Name = "Gerbil" },
-        //    new PetType { Id = 10, Name = "Tortoise" }
-        //    );
+        builder.Entity<PetType>()
+           .Property(pt => pt.Id).ValueGeneratedNever();      
     }
 
+    public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+    {
+        foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
+        {
+            switch (entry.State)
+            {
+                case EntityState.Added:
+                    entry.Entity.CreatedDate = DateTime.Now;
+                    break;
+                case EntityState.Modified:
+                    entry.Entity.UpdatedDate = DateTime.Now;
+                    break;
+            }
+        }
 
-
+        return base.SaveChangesAsync(cancellationToken);
+    }
 }

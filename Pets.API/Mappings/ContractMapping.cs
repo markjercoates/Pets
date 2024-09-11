@@ -32,6 +32,7 @@ public static class ContractMapping
         Description = pet.Description,
         MicroChipId = pet.MicroChipId,
         PetTypeId = pet.PetTypeId,
+        PetTypeName = pet.PetType.Name,
         MissingSince = pet.MissingSince,
         CreatedDate = pet.CreatedDate   
     };

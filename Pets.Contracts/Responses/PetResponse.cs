@@ -17,6 +17,8 @@ public class PetResponse
 
     public int PetTypeId { get; set; }
 
+    public string PetTypeName { get; set; } = string.Empty;
+
     public DateTime MissingSince { get; set; }
 
     public DateTime CreatedDate { get; set; }

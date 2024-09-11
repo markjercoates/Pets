@@ -32,7 +32,7 @@ public class PetService : IPetService
 
     public async Task<Pet?> GetByIdAsync(int id, CancellationToken token = default)
     {
-        return await _petRepository.GetByIdAsync(id, token);    
+        return await _petRepository.GetByIdAsync(id, token);
     }
 
     public async Task<Pet> UpdateAsync(Pet pet, CancellationToken token = default)
