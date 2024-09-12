@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pets.Applications.Models;
+namespace Pets.Contracts.Models;
 public class PagedList<T> : List<T>
 {
     public int CurrentPage { get; set; }

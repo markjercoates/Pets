@@ -1,9 +1,8 @@
 ﻿using Pets.Application.Entities;
-using Pets.Application.Models;
 using Pets.Contracts.Requests;
 using Pets.Contracts.Responses;
 
-namespace Pets.API.Mappings;
+namespace Pets.Application.Mappings;
 
 public static class ContractMapping
 {
@@ -45,10 +44,4 @@ public static class ContractMapping
             Items = pets.Select(MapToResponse)
         };
     }
-
-    public static GetAllPetsOptions MapToOptions(this GetAllPetsRequest request) => new GetAllPetsOptions
-    {
-        Name = request.Name,
-        PetTypeId = request.PetTypeId ?? 0
-    };
 }

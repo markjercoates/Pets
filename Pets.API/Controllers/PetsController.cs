@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Pets.API.Mappings;
+using Pets.API.Extensions;
+using Pets.API.Helpers;
 using Pets.Application.Interfaces;
 using Pets.Contracts.Requests;
 
@@ -14,52 +15,47 @@ public class PetsController : ControllerBase
         _petService = petService;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery]GetAllPetsRequest request,
-            CancellationToken token = default)
-    {
-        var options = request.MapToOptions();   
-        var pets = await _petService.GetAllAsync(options, token);
-        var response = pets.MapToResponse();
-        return Ok(response);
-    }
-
     [HttpGet("{id}")]
     public async Task<IActionResult> Get([FromRoute] int id, CancellationToken token = default)
     {
-        var pet = await _petService.GetByIdAsync(id, token);
-        if (pet == null)
+        var response = await _petService.GetByIdAsync(id, token);
+        if (response == null)
         {
             return NotFound();
         }
-        
-        var response = pet.MapToResponse(); 
+
         return Ok(response);
     }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] GetAllPetsRequestOptions options,
+            CancellationToken token = default)
+    {
+        var response = await _petService.GetAllAsync(options, token);
+
+        Response.AddPaginationHeader(new PaginationHeader(response.CurrentPage, response.PageSize,
+                response.TotalCount, response.TotalPages));
+
+        return Ok(response);
+    }   
 
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreatePetRequest request, CancellationToken token = default)
     {
-        var pet = request.MapToPet();
-
-        var createdPet = await _petService.CreateAsync(pet, token);  
-        var response = createdPet.MapToResponse();  
-
+        var response = await _petService.CreateAsync(request, token);  
+      
         return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePetRequest request, CancellationToken token = default)
     {
-        var pet = request.MapToPet(id);
-
-        var updatedPet = await _petService.UpdateAsync(pet, token);
-        if (updatedPet == null)
+        var response = await _petService.UpdateAsync(id, request, token);
+        if (response == null)
         {
             return NotFound();
         }
 
-        var response = updatedPet.MapToResponse();
         return Ok(response);
     }
 

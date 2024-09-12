@@ -12,4 +12,14 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="8.0.8" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <ProjectReference Include="..\Pets.Contracts\Pets.Contracts.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

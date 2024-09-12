@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using Pets.Application.Models;
-
+using Pets.Contracts.Models;
+using Pets.Contracts.Requests;
 
 namespace Pets.Persistence.Repositories;
 public class PetRepository : GenericRepository<Pet>, IPetRepository
@@ -23,7 +23,7 @@ public class PetRepository : GenericRepository<Pet>, IPetRepository
                 .SingleOrDefaultAsync(p => p.Id == id, token);
     }
 
-    public async Task<IReadOnlyList<Pet>> ListAllWithOptionsAsync(GetAllPetsOptions options, CancellationToken token = default)
+    public async Task<IReadOnlyList<Pet>> ListAllWithOptionsAsync(GetAllPetsRequestOptions options, CancellationToken token = default)
     {
         var pets = _dbContext.Pets.Include(p => p.PetType)
                             .OrderByDescending(o => o.CreatedDate)
@@ -39,7 +39,6 @@ public class PetRepository : GenericRepository<Pet>, IPetRepository
             pets = pets.Where(p => p.Name.Contains(options.Name));
         }
 
-        return await pets.ToListAsync(token);
-       
+        return await pets.ToListAsync();
     }
 }

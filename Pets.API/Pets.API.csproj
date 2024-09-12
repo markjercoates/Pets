@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Pets.Application\Pets.Application.csproj" />
-    <ProjectReference Include="..\Pets.Contracts\Pets.Contracts.csproj" />
     <ProjectReference Include="..\Pets.Persistence\Pets.Persistence.csproj" />
   </ItemGroup>
 
