@@ -1,7 +1,5 @@
 ﻿using FluentValidation;
-using Pets.Application.Entities;
 using Pets.Application.Interfaces;
-using Pets.Application.Validators;
 using Pets.Contracts.Requests;
 using Pets.Contracts.Responses;
 using Pets.Contracts.Models;
@@ -32,7 +30,7 @@ public class PetService : IPetService
         var pet = request.MapToPet();
 
         var createdPet = await _petRepository.AddAsync(pet,token);
-
+       
         return createdPet.MapToResponse();
     }
 

@@ -4,7 +4,7 @@ using Pets.Application.Entities;
 using Pets.Application;
 using Pets.Persistence;
 using Pets.Persistence.Data;
-using Pets.API.Mappings;
+using Pets.API.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,6 +26,9 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+app.UseMiddleware<ExceptionMiddleware>();
+
+// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -36,9 +39,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.UseMiddleware<ValidationMappingMiddleware>();
 app.MapControllers();
-
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;

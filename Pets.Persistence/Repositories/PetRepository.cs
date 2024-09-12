@@ -39,6 +39,6 @@ public class PetRepository : GenericRepository<Pet>, IPetRepository
             pets = pets.Where(p => p.Name.Contains(options.Name));
         }
 
-        return await pets.ToListAsync();
+        return await pets.ToListAsync(token);
     }
 }
