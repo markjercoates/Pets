@@ -1,4 +1,5 @@
 ﻿using Pets.Application.Entities;
+using Pets.Application.Models;
 using Pets.Contracts.Requests;
 using Pets.Contracts.Responses;
 
@@ -37,11 +38,17 @@ public static class ContractMapping
         CreatedDate = pet.CreatedDate   
     };
 
-    public static PetsResponse MapToResponse(this IEnumerable<Pet> movies)
+    public static PetsResponse MapToResponse(this IEnumerable<Pet> pets)
     {
         return new PetsResponse
         {
-            Items = movies.Select(MapToResponse)
+            Items = pets.Select(MapToResponse)
         };
     }
+
+    public static GetAllPetsOptions MapToOptions(this GetAllPetsRequest request) => new GetAllPetsOptions
+    {
+        Name = request.Name,
+        PetTypeId = request.PetTypeId ?? 0
+    };
 }

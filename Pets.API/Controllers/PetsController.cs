@@ -15,9 +15,11 @@ public class PetsController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken token = default)
+    public async Task<IActionResult> GetAll([FromQuery]GetAllPetsRequest request,
+            CancellationToken token = default)
     {
-        var pets = await _petService.GetAllAsync(token);
+        var options = request.MapToOptions();   
+        var pets = await _petService.GetAllAsync(options, token);
         var response = pets.MapToResponse();
         return Ok(response);
     }

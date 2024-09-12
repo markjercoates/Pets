@@ -1,4 +1,6 @@
 ﻿using Pets.Application.Entities;
+using Pets.Application.Models;
+using Pets.Applications.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +14,7 @@ public interface IPetService
 
     public Task<Pet> UpdateAsync(Pet pet, CancellationToken token = default);
 
-    public Task<IEnumerable<Pet>> GetAllAsync(CancellationToken token = default);
+    public Task<PagedList<Pet>> GetAllAsync(GetAllPetsOptions options, CancellationToken token = default);
 
     public Task<Pet?> GetByIdAsync(int id, CancellationToken token = default);
 

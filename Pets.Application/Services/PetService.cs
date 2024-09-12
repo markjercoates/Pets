@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using Pets.Application.Entities;
 using Pets.Application.Interfaces;
+using Pets.Application.Models;
+using Pets.Applications.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +27,10 @@ public class PetService : IPetService
         return await _petRepository.AddAsync(pet,token);
     }  
 
-    public async Task<IEnumerable<Pet>> GetAllAsync(CancellationToken token = default)
+    public async Task<PagedList<Pet>> GetAllAsync(GetAllPetsOptions options, CancellationToken token = default)
     {
-        return await _petRepository.ListAllAsync(token);
+        var pets = await _petRepository.ListAllWithOptionsAsync(options, token);
+        return await PagedList<Pet>.CreateAsync(pets,options.PageNumber, options.PageSize);
     }
 
     public async Task<Pet?> GetByIdAsync(int id, CancellationToken token = default)

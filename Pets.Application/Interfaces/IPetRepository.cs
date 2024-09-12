@@ -1,4 +1,5 @@
 ﻿using Pets.Application.Entities;
+using Pets.Application.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,5 +9,5 @@ using System.Threading.Tasks;
 namespace Pets.Application.Interfaces;
 public interface IPetRepository : IGenericRepository<Pet>   
 {
-    //public Task<Pet?> GetByIdAsync(int id, CancellationToken token = default);
+    Task<IReadOnlyList<Pet>> ListAllWithOptionsAsync(GetAllPetsOptions options, CancellationToken token = default);
 }
