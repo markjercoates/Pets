@@ -24,7 +24,7 @@ public class CreatePetRequestValidator : AbstractValidator<CreatePetRequest>
         RuleFor(x => x.MissingSince).NotEqual(default(DateTime))
                 .WithMessage("Missing Since is required");
 
-        RuleFor(x => x.MissingSince).LessThan(DateTime.UtcNow)
+        RuleFor(x => x.MissingSince).LessThanOrEqualTo(DateTime.UtcNow)
                 .WithMessage("Missing Since must be less than current date");
 
         RuleFor(x => x.Description)
@@ -53,7 +53,7 @@ public class UpdatePetRequestValidator : AbstractValidator<UpdatePetRequest>
         RuleFor(x => x.MissingSince).NotEqual(default(DateTime))
                 .WithMessage("Missing Since is required");
 
-        RuleFor(x => x.MissingSince).LessThan(DateTime.UtcNow)
+        RuleFor(x => x.MissingSince).LessThanOrEqualTo(DateTime.UtcNow)
                 .WithMessage("Missing Since must be less than current date");
 
         RuleFor(x => x.Description)

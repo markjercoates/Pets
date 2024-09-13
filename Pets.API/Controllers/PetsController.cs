@@ -42,32 +42,36 @@ public class PetsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreatePetRequest request, CancellationToken token = default)
     {
-        var response = await _petService.CreateAsync(request, token);  
-      
+        var response = await _petService.CreateAsync(request, token);
+        if(response is null)
+        {
+            return BadRequest("Problem creating a new Pet");
+        }
+
         return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePetRequest request, CancellationToken token = default)
     {
-        var response = await _petService.UpdateAsync(id, request, token);
-        if (response == null)
+        var result = await _petService.UpdateAsync(id, request, token);
+        if (!result)
         {
-            return NotFound();
+            return BadRequest("Problem finding or updating the Pet");
         }
 
-        return Ok(response);
+        return NoContent();
     }
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete([FromRoute]int id, CancellationToken token = default)
     {
-        var deleted = await _petService.DeleteAsync(id, token); 
-        if(!deleted)
+        var result = await _petService.DeleteAsync(id, token); 
+        if(!result)
         {
-            return NotFound();
+            return BadRequest("Problem finding or deleting the Pet");
         }
 
-        return Ok();
+        return NoContent();
     }
 }

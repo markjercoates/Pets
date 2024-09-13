@@ -25,6 +25,15 @@ public static class ContractMapping
         MissingSince = request.MissingSince,
     };
 
+    public static void MapToPet(this UpdatePetRequest request, Pet pet)
+    {
+        pet.Name = request.Name;
+        pet.Description = request.Description;
+        pet.MicroChipId = request.MicroChipId;
+        pet.MissingSince = request.MissingSince;
+        pet.PetTypeId = request.PetTypeId;
+    }
+
     public static PetResponse MapToResponse(this Pet pet) => new PetResponse
     {
         Id = pet.Id,
@@ -32,7 +41,7 @@ public static class ContractMapping
         Description = pet.Description,
         MicroChipId = pet.MicroChipId,
         PetTypeId = pet.PetTypeId,
-        PetTypeName = pet.PetType.Name,
+        PetTypeName = pet.PetType.Name ?? string.Empty,
         MissingSince = pet.MissingSince,
         CreatedDate = pet.CreatedDate   
     };
@@ -42,6 +51,20 @@ public static class ContractMapping
         return new PetsResponse
         {
             Items = pets.Select(MapToResponse)
+        };
+    }
+
+    public static PetTypeResponse MapToResponse(this PetType petType) => new PetTypeResponse
+    {
+        Id = petType.Id,
+        Name = petType.Name
+    };
+
+    public static PetTypesResponse MapToResponse(this IEnumerable<PetType> petTypes)
+    {
+        return new PetTypesResponse
+        {
+            Items = petTypes.Select(MapToResponse)
         };
     }
 }

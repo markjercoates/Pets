@@ -14,9 +14,10 @@ public static class PersistenceServiceRegistrations
         services.AddDbContext<PetsDbContext>(options =>
             options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
 
-        services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IPetRepository, PetRepository>();
-     
+        services.AddScoped<IPetTypeRepository, PetTypeRepository>();
+
         return services;
     }
 }
