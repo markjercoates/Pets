@@ -5,18 +5,20 @@ using Pets.Application;
 using Pets.Persistence;
 using Pets.Persistence.Data;
 using Pets.API.Middleware;
+using Pets.API.Extensions;
+using Pets.Application.Interfaces;
+using Pets.API.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplicationServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
+builder.Services.AddIdentityServices(builder.Configuration);
+builder.Services.AddSwaggerDocumentation();
 
-builder.Services.AddIdentityCore<AppUser>(opt =>
-{
-    opt.Password.RequireNonAlphanumeric = true;
-})
-.AddRoles<IdentityRole>()
-.AddEntityFrameworkStores<PetsDbContext>();
+builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
+
 
 builder.Services.AddControllers();
 
@@ -37,6 +39,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

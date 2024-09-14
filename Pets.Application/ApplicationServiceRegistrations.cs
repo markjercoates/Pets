@@ -9,6 +9,7 @@ public static class ApplicationServiceRegistrations
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
+       
         services.AddScoped<IPetService,PetService>();
         services.AddScoped<IPetTypeService, PetTypeService>();
         services.AddValidatorsFromAssemblyContaining<IApplicationMarker>(ServiceLifetime.Singleton);

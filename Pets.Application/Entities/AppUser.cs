@@ -9,3 +9,8 @@ namespace Pets.Application.Entities;
 public class AppUser : IdentityUser
 {
 }
+
+public class AppRole : IdentityRole
+{
+}
+

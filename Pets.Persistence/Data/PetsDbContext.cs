@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Pets.Persistence.Data;
-public class PetsDbContext : IdentityDbContext<AppUser>
+public class PetsDbContext : IdentityDbContext<AppUser, AppRole, string>
 {
     public PetsDbContext(DbContextOptions options) : base(options)
     {

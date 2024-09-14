@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Pets.API.Extensions;
 using Pets.API.Helpers;
 using Pets.Application.Interfaces;
@@ -37,8 +38,9 @@ public class PetsController : ControllerBase
                 response.TotalCount, response.TotalPages));
 
         return Ok(response);
-    }   
+    }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreatePetRequest request, CancellationToken token = default)
     {
@@ -51,6 +53,7 @@ public class PetsController : ControllerBase
         return CreatedAtAction(nameof(Get), new { id = response.Id }, response);
     }
 
+    [Authorize]
     [HttpPut("{id}")]
     public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePetRequest request, CancellationToken token = default)
     {
@@ -63,6 +66,7 @@ public class PetsController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete([FromRoute]int id, CancellationToken token = default)
     {
