@@ -34,6 +34,14 @@ public class CreatePetRequestValidator : AbstractValidator<CreatePetRequest>
         RuleFor(x => x.MicroChipId)
                .MaximumLength(20)
                .WithMessage("MicroChipId must be less than 20 characters");
+
+        RuleFor(x => x.OwnerName)
+               .MaximumLength(100)
+               .WithMessage("Owner Name must be less than 100 characters");
+
+        RuleFor(x => x.OwnerEmail)
+               .MaximumLength(100)
+               .WithMessage("Owner Email must be less than 100 characters");
     }   
 }
 
@@ -63,6 +71,14 @@ public class UpdatePetRequestValidator : AbstractValidator<UpdatePetRequest>
         RuleFor(x => x.MicroChipId)
                .MaximumLength(20)
                .WithMessage("MicroChipId must be less than 20 characters");
+
+        RuleFor(x => x.OwnerName)
+              .MaximumLength(100)
+              .WithMessage("Owner Name must be less than 100 characters");
+
+        RuleFor(x => x.OwnerEmail)
+               .MaximumLength(100)
+               .WithMessage("Owner Email must be less than 100 characters");
     }
 }
 

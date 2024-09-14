@@ -15,6 +15,10 @@ public class Pet : AuditableEntity
 
     public string? MicroChipId { get; set; }
 
+    public string? OwnerName { get; set; } 
+
+    public string? OwnerEmail { get; set; }    
+
     public int PetTypeId { get; set; }
 
     public PetType PetType { get; set; } = null!;

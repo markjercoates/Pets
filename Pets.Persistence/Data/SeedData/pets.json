@@ -4,69 +4,89 @@
     "Description": "Rocky is a 3 year old",
     "PetTypeId": 2,
     "MicroChipId": "AA123456789",
-    "MissingSince": "2024-08-01"
+    "MissingSince": "2024-08-01",
+    "OwnerName": "John",
+    "OwnerEmail" : "john@test.com"
   },
   {
     "Name": "Charlie",
     "Description": "Charlie is a 5 year old labrador",
     "PetTypeId": 2,
     "MicroChipId": "BB123456789",
-    "MissingSince": "2024-09-01"
+    "MissingSince": "2024-09-01",
+    "OwnerName": "Bob",
+    "OwnerEmail": "bob@test.com"
   },
   {
     "Name": "Bella",
     "Description": "Bella is a 2 year old",
     "PetTypeId": 2,
     "MicroChipId": "CC123456789",
-    "MissingSince": "2024-09-02"
+    "MissingSince": "2024-09-02",
+    "OwnerName": "Julie",
+    "OwnerEmail": "julie@test.com"
   },
   {
     "Name": "Luna",
     "Description": "Luna is a 1 year old",
     "PetTypeId": 2,
     "MicroChipId": "DD123456789",
-    "MissingSince": "2024-08-31"
+    "MissingSince": "2024-08-31",
+    "OwnerName": "Mark",
+    "OwnerEmail": "mark@test.com"
   },
   {
     "Name": "Lucy",
     "Description": "Lucy is a 4 year old",
     "PetTypeId": 1,
     "MicroChipId": "EE123456789",
-    "MissingSince": "2024-08-10"
+    "MissingSince": "2024-08-10",
+    "OwnerName": "Fred",
+    "OwnerEmail": "fred@test.com"
   },
   {
     "Name": "Max",
     "Description": "Max is a 5 year old",
     "PetTypeId": 1,
     "MicroChipId": "FF123456789",
-    "MissingSince": "2024-08-14"
+    "MissingSince": "2024-08-14",
+    "OwnerName": "",
+    "OwnerEmail": ""
   },
   {
     "Name": "Daisy",
     "Description": "Daisy is a 6 year old",
     "PetTypeId": 1,
     "MicroChipId": "GG123456789",
-    "MissingSince": "2024-02-01"
+    "MissingSince": "2024-02-01",
+    "OwnerName": "",
+    "OwnerEmail": ""
   },
   {
     "Name": "Bailey",
     "Description": "Bailey is a 7 year old",
     "PetTypeId": 1,
     "MicroChipId": "HH123456789",
-    "MissingSince": "2024-03-01"
+    "MissingSince": "2024-03-01",
+    "OwnerName": "",
+    "OwnerEmail": ""
   },
   {
     "Name": "Cooper",
     "Description": "Cooper is a 8 year old",
     "PetTypeId": 5,
     "MicroChipId": "",
-    "MissingSince": "2024-08-17"
+    "MissingSince": "2024-08-17",
+    "OwnerName": "",
+    "OwnerEmail": ""
   },
   {
     "Name": "Lola",
     "Description": "Lola is a 9 year old",
     "PetTypeId": 3,
     "MicroChipId": "",
-    "MissingSince": "2024-06-06"
+    "MissingSince": "2024-06-06",
+    "OwnerName": "",
+    "OwnerEmail": ""
   }
 ]

@@ -19,6 +19,10 @@ public class PetResponse
 
     public string PetTypeName { get; set; } = string.Empty;
 
+    public string? OwnerName { get; set; }
+
+    public string? OwnerEmail { get; set; } 
+
     public DateTime MissingSince { get; set; }
 
     public DateTime CreatedDate { get; set; }

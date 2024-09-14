@@ -11,14 +11,14 @@ namespace Pets.Persistence.Data;
 public class Seed
 {
     public static async Task SeedUsers( UserManager<AppUser> userManager,
-         RoleManager<IdentityRole> roleManager)
+         RoleManager<AppRole> roleManager)
     {
         if(!roleManager.Roles.Any())
         {
-            var roles = new List<IdentityRole>
+            var roles = new List<AppRole>
             {
-                new IdentityRole {  Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "ADMIN" },
-                new IdentityRole {  Id = Guid.NewGuid().ToString(), Name = "User" , NormalizedName = "USER"},
+                new AppRole {  Id = Guid.NewGuid().ToString(), Name = "Admin", NormalizedName = "ADMIN" },
+                new AppRole {  Id = Guid.NewGuid().ToString(), Name = "User" , NormalizedName = "USER"},
             };
 
             foreach (var role in roles)
@@ -79,7 +79,7 @@ public class Seed
 
             context.Pets.AddRange(pets);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync("eeb52ea8-5810-436e-91d3-7a086be918de");
         }
     }
 }

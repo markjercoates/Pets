@@ -13,6 +13,10 @@ public class UpdatePetRequest
 
     public string? MicroChipId { get; set; }
 
+    public string? OwnerName { get; set; }
+
+    public string? OwnerEmail { get; set; }
+
     public int PetTypeId { get; set; }
 
     public DateTime MissingSince { get; set; }

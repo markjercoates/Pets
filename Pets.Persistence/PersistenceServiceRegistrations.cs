@@ -9,7 +9,8 @@ namespace Pets.Persistence;
 
 public static class PersistenceServiceRegistrations
 {
-    public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddPersistenceServices(this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.AddDbContext<PetsDbContext>(options =>
             options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
@@ -21,3 +22,15 @@ public static class PersistenceServiceRegistrations
         return services;
     }
 }
+
+//public static class DbContextOptionsBuilderExtensions
+//{
+//    public static DbContextOptionsBuilder UseLoggedInUserService(
+//        this DbContextOptionsBuilder optionsBuilder,
+//        ILoggedInUserService loggedInUserService)
+//    {
+//        // Assuming you have a way to set the loggedInUserService in the DbContext
+//        optionsBuilder.ReplaceService<ILoggedInUserService, LoggedInUserService>(loggedInUserService);
+//        return optionsBuilder;
+//    }
+//}

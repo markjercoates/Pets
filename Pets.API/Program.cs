@@ -19,11 +19,9 @@ builder.Services.AddSwaggerDocumentation();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ILoggedInUserService, LoggedInUserService>();
 
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddControllers();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -50,7 +48,7 @@ try
 {
     var context = services.GetRequiredService<PetsDbContext>();
     var userManager = services.GetRequiredService<UserManager<AppUser>>();
-    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
     await Seed.SeedUsers(userManager, roleManager);
     await Seed.SeedTestData(context);
