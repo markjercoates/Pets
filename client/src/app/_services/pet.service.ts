@@ -7,37 +7,45 @@ import { PaginatedResult } from '../_models/pagination';
 import { setPaginatedResponse } from './paginationHelper';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PetService {
   private http = inject(HttpClient);
   baseUrl = environment.apiUrl;
   paginatedResult = signal<PaginatedResult<Pet[]> | null>(null);
-  
-  getPets(pageNumber?: number, pageSize?: number) {
+
+  getPets(
+    pageNumber?: number,
+    pageSize?: number,
+    petTypeId?: number,
+    petName?: string
+  ) {
     let params = new HttpParams();
 
-    if(pageNumber != null && pageSize != null){
+    if (pageNumber != null && pageSize != null) {
       params = params.append('pageNumber', pageNumber.toString());
       params = params.append('pageSize', pageSize.toString());
     }
-    
-    return this.http.get<Pet[]>(this.baseUrl + 'pets', {observe: 'response', params}).subscribe({
-      next: response => {
-        setPaginatedResponse(response, this.paginatedResult);
-       /*  this.paginatedResult.set({
-           items: response.body as Pet[],
-           pagination: JSON.parse(response.headers.get('Pagination')!)
-        }) */
-      }   
-    })
+
+    params = params.append('petTypeId', petTypeId!.toString());
+    if (petName) {
+      params = params.append('name', petName);
+    }
+
+    return this.http
+      .get<Pet[]>(this.baseUrl + 'pets', { observe: 'response', params })
+      .subscribe({
+        next: (response) => {
+          setPaginatedResponse(response, this.paginatedResult);
+        },
+      });
   }
 
-  getPet(id:number) {
+  getPet(id: number) {
     return this.http.get<Pet>(this.baseUrl + 'pets/' + id);
   }
 
-  getPetTypes(){
-    return this.http.get<PetType[]>(this.baseUrl + 'pets/types');
- } 
+  getPetTypes() {
+    return this.http.get<PetType[]>(this.baseUrl + 'petTypes');
+  }
 }

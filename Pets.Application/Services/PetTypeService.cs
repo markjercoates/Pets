@@ -16,10 +16,10 @@ public class PetTypeService : IPetTypeService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<PetTypesResponse> GetAllAsync(CancellationToken token = default)
+    public async Task<IEnumerable<PetTypeResponse>> GetAllAsync(CancellationToken token = default)
     {
-        var petTypes = await _unitOfWork.PetTypeRepository.ListAllAsync(token); 
-        return petTypes.MapToResponse();
+        var petTypes = await _unitOfWork.PetTypeRepository.ListAllAsync(token);
+        return petTypes.Select(p => p.MapToResponse());
     }
 
     public async Task<PetTypeResponse?> GetByIdAsync(int id, CancellationToken token = default)

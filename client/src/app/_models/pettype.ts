@@ -1,4 +1,4 @@
-export interface PetType{
-    id: number;
-    name: string;
+export interface PetType {
+  id: number;
+  name: string;
 }
