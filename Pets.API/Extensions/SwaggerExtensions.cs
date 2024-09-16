@@ -4,6 +4,11 @@ namespace Pets.API.Extensions;
 
 public static class SwaggerExtensions
 {
+    /// <summary>
+    /// https://stackoverflow.com/questions/66265594/oauth-implementation-in-asp-net-core-using-swagger
+    /// </summary>
+    /// <param name="services"></param>
+    /// <returns></returns>
     public static IServiceCollection AddSwaggerDocumentation(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();

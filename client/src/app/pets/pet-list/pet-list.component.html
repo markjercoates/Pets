@@ -1,0 +1,52 @@
+<table class="table table-striped table-bordered mt-3" style="cursor: pointer">
+  <thead>
+    <tr>
+      <th>Pet Name</th>
+      <th>Pet Type</th>
+      <th>MicroChip</th>
+      <th>Owner Name</th>
+      <th>Missing Since</th>
+      <th>Reported</th>
+    </tr>
+  </thead>
+  <tbody class="align-middle">
+    @for (pet of petService.paginatedResult()?.items; track pet.id){
+    <tr>
+      <td>{{ pet.name }}</td>
+      <td>{{ pet.petTypeName }}</td>
+      <td>{{ pet.microChipId }}</td>
+      <td>{{ pet.ownerName }}</td>
+      <td>{{ pet.missingSince | date : "longDate" }}</td>
+      <td>{{ pet.createdDate | date : "longDate" }}</td>
+    </tr>
+    }
+
+    <!--  <tr *ngFor="let pet of pets">
+      <td>{{ pet.name }}</td>
+      <td>{{ pet.species }}</td>
+      <td>{{ pet.birthdate | date }}</td>
+      <td>
+        <a [routerLink]="['/pets', pet.id]">View</a>
+        <a [routerLink]="['/pets', pet.id, 'edit']">Edit</a>
+      </td>
+    </tr> -->
+  </tbody>
+</table>
+
+@if (petService.paginatedResult()?.pagination) {
+<div class="d-flex justify-content-center">
+  <pagination
+    [boundaryLinks]="true"
+    [totalItems]="(petService.paginatedResult()?.pagination)!.totalItems"
+    [itemsPerPage]="(petService.paginatedResult()?.pagination)!.itemsPerPage"
+    (pageChanged)="pageChanged($event)"
+    [(ngModel)]="(petService.paginatedResult()?.pagination)!.currentPage"
+    [maxSize]="10"
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;"
+  >
+  </pagination>
+</div>
+}
