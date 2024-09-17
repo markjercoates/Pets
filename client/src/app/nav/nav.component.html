@@ -1,22 +1,21 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
-    <a class="navbar-brand" href="#">Pets Alone</a>
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
       <li class="nav-item">
-        <a class="nav-link" href="/pets">Missing Pets</a>
+        <a routerLink="/" routerLinkActive="active" class="nav-link"
+          >Pets Alone</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Create Alert</a>
+        <a routerLink="/pets" routerLinkActive="active" class="nav-link"
+          >Missing Pets</a
+        >
+      </li>
+      <li class="nav-item">
+        <a routerLink="/pets/create" routerLinkActive="active" class="nav-link"
+          >Create New Missing Pet</a
+        >
       </li>
     </ul>
-    <form class="d-flex" role="search">
-      <input
-        class="form-control me-2"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
   </div>
 </nav>
