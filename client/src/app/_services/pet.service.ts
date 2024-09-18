@@ -52,6 +52,14 @@ export class PetService {
   }
 
   createPet(model: any) {
-    return this.http.post<CreatePet>(this.baseUrl + 'pets', model);
+    return this.http.post<Pet>(this.baseUrl + 'pets', model);
+  }
+
+  updatePet(id: number, model: any) {
+    return this.http.put(this.baseUrl + 'pets/' + id, model);
+  }
+
+  deletePet(id: number) {
+    return this.http.delete(this.baseUrl + 'pets/' + id);
   }
 }

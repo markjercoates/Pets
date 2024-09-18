@@ -5,11 +5,12 @@ import { Pet } from '../../_models/pet';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
 import { PetType } from '../../_models/pettype';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-pet-list',
   standalone: true,
-  imports: [PaginationModule, DatePipe, FormsModule, NgFor],
+  imports: [PaginationModule, DatePipe, FormsModule, NgFor, RouterLink],
   templateUrl: './pet-list.component.html',
   styleUrl: './pet-list.component.css',
 })
@@ -24,7 +25,6 @@ export class PetListComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.petService.paginatedResult()) this.loadPets();
-
     this.loadPetTypes();
   }
 

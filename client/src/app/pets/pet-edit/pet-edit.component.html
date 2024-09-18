@@ -1,0 +1,161 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-4">
+      <form [formGroup]="editForm" (ngSubmit)="update()" autocomplete="off">
+        <h2 class="text-center text-primary">Edit missing pet</h2>
+        <hr />
+        <div class="mb-3 form-floating">
+          <input
+            [class.is-invalid]="
+              editForm.get('name')?.errors && editForm.get('name')?.touched
+            "
+            type="text"
+            class="form-control"
+            id="name"
+            formControlName="name"
+            placeholder="Pet Name"
+          />
+          <label for="name">Pet Name</label>
+          <div
+            *ngIf="editForm.get('name')?.hasError('required')"
+            class="invalid-feedback text-start"
+          >
+            Please enter the pets name
+          </div>
+          <div
+            *ngIf="editForm.get('name')?.hasError('maxLength')"
+            class="invalid-feedback text-start"
+          >
+            Pet Name must be less than 50 characters
+          </div>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <select
+            formControlName="petTypeId"
+            id="petTypeId"
+            style="width: 230px"
+            class="form-select ms-1"
+          >
+            <option value="">Select Pet Type</option>
+            @for (pettype of petTypes; track pettype.id) {
+            <option [value]="pettype.id">
+              {{ pettype.name }}
+            </option>
+            }
+          </select>
+          <label for="petTyepId">Pet Type</label>
+          <div
+            *ngIf="editForm.get('petTypeId')?.hasError('required')"
+            class="invalid-feedback text-start"
+          >
+            Please select the Pet Type
+          </div>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input
+            [class.is-invalid]="
+              editForm.get('missingSince')?.errors &&
+              editForm.get('missingSince')?.touched
+            "
+            class="form-control"
+            #dp="bsDatepicker"
+            id="missingSince"
+            formControlName="missingSince"
+            bsDatepicker
+            [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+            [maxDate]="maxDate"
+            placeholder="Missing Since Date"
+          />
+          <label for="missingSince">Missing Since</label>
+          <div
+            *ngIf="editForm.get('missingSince')?.hasError('required')"
+            class="invalid-feedback text-start"
+          >
+            Please select a missing date
+          </div>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="descrption"
+            formControlName="description"
+            placeholder="Pet Description"
+          />
+          <label for="description">Pet Description</label>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input
+            [class.is-invalid]="
+              editForm.get('microChipId')?.errors &&
+              editForm.get('microChipId')?.touched
+            "
+            type="text"
+            class="form-control"
+            id="microChipId"
+            formControlName="microChipId"
+            placeholder="MicroChip ID"
+          />
+          <label for="microChipId">MicroChip ID</label>
+          <div
+            *ngIf="editForm.get('microChipId')?.hasError('maxLength')"
+            class="invalid-feedback text-start"
+          >
+            MicroChip must be less than 20 characters
+          </div>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="ownerName"
+            formControlName="ownerName"
+            placeholder="Owner Name"
+          />
+          <label for="ownerName">Owner Name</label>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input
+            type="text"
+            class="form-control"
+            id="ownerEmail"
+            formControlName="ownerEmail"
+            placeholder="Owner Email"
+          />
+          <label for="ownerEmail">Owner Email</label>
+        </div>
+
+        @if (validationErrors) {
+        <div class="alert alert-danger text-start">
+          <ul>
+            @for (error of validationErrors; track $index) {
+            <li>{{ error }}</li>
+            }
+          </ul>
+        </div>
+        }
+        <div class="form-group text-center">
+          <button
+            [disabled]="!editForm.valid"
+            class="btn btn-success me-2"
+            type="submit"
+          >
+            Update
+          </button>
+          <button class="btn btn-warning me-2" (click)="delete()" type="button">
+            Delete
+          </button>
+          <button class="btn btn-default me-2" (click)="cancel()" type="button">
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

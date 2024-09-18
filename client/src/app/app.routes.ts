@@ -6,6 +6,7 @@ import { LoginComponent } from './account/login/login.component';
 import { authGuard } from './_guards/auth.guard';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { PetEditComponent } from './pets/pet-edit/pet-edit.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -13,6 +14,11 @@ export const routes: Routes = [
   {
     path: 'pets/create',
     component: PetCreateComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'pets/:id',
+    component: PetEditComponent,
     canActivate: [authGuard],
   },
   { path: 'account/login', component: LoginComponent },

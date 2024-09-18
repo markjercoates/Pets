@@ -45,6 +45,7 @@
         <th>Owner Name</th>
         <th>Missing Since</th>
         <th>Reported</th>
+        <th></th>
       </tr>
     </thead>
     <tbody class="align-middle">
@@ -56,6 +57,11 @@
         <td>{{ pet.ownerName }}</td>
         <td>{{ pet.missingSince | date : "longDate" }}</td>
         <td>{{ pet.createdDate | date : "medium" }}</td>
+        <td>
+          <button class="btn btn-primary" routerLink="/pets/{{ pet.id }}">
+            <i class="fas fa-edit"></i>
+          </button>
+        </td>
       </tr>
       }
     </tbody>
