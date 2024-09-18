@@ -47,7 +47,7 @@ public static class ContractMapping
         Description = pet.Description,
         MicroChipId = pet.MicroChipId,
         PetTypeId = pet.PetTypeId,
-        PetTypeName = pet.PetType.Name ?? string.Empty,
+        PetTypeName = pet.PetType?.Name ?? string.Empty,
         MissingSince = pet.MissingSince,
         OwnerName = pet.OwnerName,
         OwnerEmail = pet.OwnerEmail,

@@ -5,6 +5,8 @@ import { PetType } from '../_models/pettype';
 import { Pet } from '../_models/pet';
 import { PaginatedResult } from '../_models/pagination';
 import { setPaginatedResponse } from './paginationHelper';
+import { Observable } from 'rxjs/internal/Observable';
+import { CreatePet } from '../_models/createpet';
 
 @Injectable({
   providedIn: 'root',
@@ -47,5 +49,9 @@ export class PetService {
 
   getPetTypes() {
     return this.http.get<PetType[]>(this.baseUrl + 'petTypes');
+  }
+
+  createPet(model: any) {
+    return this.http.post<CreatePet>(this.baseUrl + 'pets', model);
   }
 }

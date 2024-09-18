@@ -5,24 +5,32 @@ import { User } from '../_models/user';
 import { map } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AccountService {
   private http = inject(HttpClient);
   baseUrl = environment.apiUrl;
-  currentuser = signal<User | null>(null);
+  currentUser = signal<User | null>(null);
 
-  login(model:any){
+  login(model: any) {
     return this.http.post<User>(this.baseUrl + 'account/login', model).pipe(
       map((response: User) => {
         const user = response;
-        if(user){
+        if (user) {
           localStorage.setItem('user', JSON.stringify(user));
-          this.currentuser.set(user);
+          this.currentUser.set(user);
         }
       })
-    )
+    );
   }
-  
-  constructor() { }
+
+  setCurrentUser(user: User) {
+    localStorage.setItem('user', JSON.stringify(user));
+    this.currentUser.set(user);
+  }
+
+  logout() {
+    localStorage.removeItem('user');
+    this.currentUser.set(null);
+  }
 }

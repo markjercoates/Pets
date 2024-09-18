@@ -7,33 +7,50 @@
         <div class="mb-3 form-floating">
           <input
             [class.is-invalid]="
-              createForm.get('petName')?.errors &&
-              createForm.get('petName')?.touched
+              createForm.get('name')?.errors && createForm.get('name')?.touched
             "
             type="text"
             class="form-control"
-            id="petName"
-            formControlName="petName"
+            id="name"
+            formControlName="name"
             placeholder="Pet Name"
           />
-          <label for="petName">Pet Name</label>
+          <label for="name">Pet Name</label>
           <div
-            *ngIf="createForm.get('petName')?.hasError('required')"
+            *ngIf="createForm.get('name')?.hasError('required')"
             class="invalid-feedback text-start"
           >
             Please enter the pets name
           </div>
+          <div
+            *ngIf="createForm.get('name')?.hasError('maxLength')"
+            class="invalid-feedback text-start"
+          >
+            Pet Name must be less than 50 characters
+          </div>
         </div>
 
         <div class="mb-3 form-floating">
-          <input
-            type="text"
-            class="form-control"
-            id="descrption"
-            formControlName="description"
-            placeholder="Pet Description"
-          />
-          <label for="description">Pet Description</label>
+          <select
+            formControlName="petTypeId"
+            id="petTypeId"
+            style="width: 230px"
+            class="form-select ms-1"
+          >
+            <option value="">Select Pet Type</option>
+            @for (pettype of petTypes; track pettype.id) {
+            <option [value]="pettype.id">
+              {{ pettype.name }}
+            </option>
+            }
+          </select>
+          <label for="petTyepId">Pet Type</label>
+          <div
+            *ngIf="createForm.get('petTypeId')?.hasError('required')"
+            class="invalid-feedback text-start"
+          >
+            Please select the Pet Type
+          </div>
         </div>
 
         <div class="mb-3 form-floating">
@@ -66,11 +83,32 @@
           <input
             type="text"
             class="form-control"
+            id="descrption"
+            formControlName="description"
+            placeholder="Pet Description"
+          />
+          <label for="description">Pet Description</label>
+        </div>
+
+        <div class="mb-3 form-floating">
+          <input
+            [class.is-invalid]="
+              createForm.get('microChipId')?.errors &&
+              createForm.get('microChipId')?.touched
+            "
+            type="text"
+            class="form-control"
             id="microChipId"
             formControlName="microChipId"
             placeholder="MicroChip ID"
           />
           <label for="microChipId">MicroChip ID</label>
+          <div
+            *ngIf="createForm.get('microChipId')?.hasError('maxLength')"
+            class="invalid-feedback text-start"
+          >
+            MicroChip must be less than 20 characters
+          </div>
         </div>
 
         <div class="mb-3 form-floating">

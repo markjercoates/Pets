@@ -29,15 +29,17 @@ public class ExceptionMiddleware
         {
             _logger.LogError(ex, ex.Message);
             context.Response.StatusCode = 400;
-         
+
             var validationFailureResponse = new ValidationFailureResponse
             {
-                Errors = ex.Errors.Select(e => new ValidationResponse
-                {
-                    PropertyName = e.PropertyName,
-                    Message = e.ErrorMessage
-                })
-            };          
+                Errors = ex.Errors.Select(e => e.ErrorMessage).ToList()
+                //new ValidationResponse
+                //{
+                //    PropertyName = e.PropertyName,
+                //    Message = e.ErrorMessage
+                //})
+            };
+            
 
             await context.Response.WriteAsJsonAsync(validationFailureResponse);
         }

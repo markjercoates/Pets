@@ -1,21 +1,39 @@
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <div class="container">
+    <a class="navbar-brand" routerLink="/" routerLinkActive="active"
+      >Pets Alone</a
+    >
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
-      <li class="nav-item">
-        <a routerLink="/" routerLinkActive="active" class="nav-link"
-          >Pets Alone</a
-        >
-      </li>
       <li class="nav-item">
         <a routerLink="/pets" routerLinkActive="active" class="nav-link"
           >Missing Pets</a
         >
       </li>
+      @if (accountService.currentUser()) {
       <li class="nav-item">
         <a routerLink="/pets/create" routerLinkActive="active" class="nav-link"
           >Create New Missing Pet</a
         >
       </li>
+      }
     </ul>
+
+    @if (accountService.currentUser()) {
+    <div dropdown class="dropdown">
+      <a dropdownToggle class="dropdown-toggle text-light text-decoration-none">
+        Welcome {{ accountService.currentUser()?.username }}
+      </a>
+      <div *dropdownMenu class="dropdown-menu">
+        <a class="dropdown-item" (click)="logout()">Logout</a>
+      </div>
+    </div>
+    } @if (!accountService.currentUser()) {
+    <ul>
+      <li class="nav-item"></li>
+      <a routerLink="/account/login" class="btn btn-outline-secondary me-2"
+        >Login</a
+      >
+    </ul>
+    }
   </div>
 </nav>

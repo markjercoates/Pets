@@ -1,1 +1,67 @@
-<p>login works!</p>
+<div class="d-flex justify-content-center mt-5">
+  <div class="col-3">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="text-center mb-4">
+        <h1 class="mb-3">Login</h1>
+      </div>
+
+      <div class="mb-3 form-floating">
+        <input
+          [class.is-invalid]="
+            loginForm.get('userName')?.errors &&
+            loginForm.get('userName')?.touched
+          "
+          type="text"
+          class="form-control"
+          id="userName"
+          formControlName="userName"
+          placeholder="UserName"
+        />
+        <label for="userName">User Name</label>
+        <div
+          *ngIf="loginForm.get('userName')?.hasError('required')"
+          class="invalid-feedback text-start"
+        >
+          Please enter the user name
+        </div>
+      </div>
+
+      <div class="mb-3 form-floating">
+        <input
+          [class.is-invalid]="
+            loginForm.get('password')?.errors &&
+            loginForm.get('password')?.touched
+          "
+          type="password"
+          class="form-control"
+          id="password"
+          formControlName="password"
+          placeholder="PassWord"
+        />
+        <label for="password">Password</label>
+        <div
+          *ngIf="loginForm.get('password')?.hasError('required')"
+          class="invalid-feedback text-start"
+        >
+          Please enter the Password
+        </div>
+      </div>
+
+      <div class="d-grid">
+        <button
+          [disabled]="loginForm.invalid"
+          class="btn btn-lg btn-primary mt-3"
+          type="submit"
+        >
+          Log in
+        </button>
+      </div>
+
+      <div class="text-center mt-2">
+        <code class="mt-1" style="background-color: whitesmoke">
+          Login with admin&#64;test.com Pa$$w0rd
+        </code>
+      </div>
+    </form>
+  </div>
+</div>

@@ -15,7 +15,8 @@ import {
   BsDatepickerConfig,
   BsDatepickerModule,
 } from 'ngx-bootstrap/datepicker';
-
+import { PetService } from '../../_services/pet.service';
+import { PetType } from '../../_models/pettype';
 @Component({
   selector: 'app-pet-create',
   standalone: true,
@@ -25,11 +26,13 @@ import {
 })
 export class PetCreateComponent implements OnInit {
   private fb = inject(FormBuilder);
+  petService = inject(PetService);
   private router = inject(Router);
   cancelRegister = output<boolean>();
   createForm: FormGroup = new FormGroup({});
   bsValue: Date;
   maxDate: Date;
+  petTypes: PetType[] = [];
   validationErrors: string[] | undefined;
 
   constructor() {
@@ -41,22 +44,40 @@ export class PetCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.initializeForm();
+    this.loadPetTypes();
   }
 
   initializeForm() {
     this.createForm = new FormGroup({
-      petName: new FormControl('', Validators.required),
-      description: new FormControl(''),
-      microChipId: new FormControl(''),
+      name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(50),
+      ]),
+      description: new FormControl('', Validators.maxLength(100)),
+      microChipId: new FormControl('', Validators.maxLength(20)),
       missingSince: new FormControl('', Validators.required),
-      ownerName: new FormControl(''),
-      ownerEmail: new FormControl(''),
+      ownerName: new FormControl('', Validators.maxLength(100)),
+      ownerEmail: new FormControl('', Validators.maxLength(100)),
+      petTypeId: new FormControl('', Validators.required),
     });
   }
 
-  create() {}
+  loadPetTypes() {
+    this.petService.getPetTypes().subscribe({
+      next: (petTypes) => {
+        this.petTypes = petTypes || [];
+      },
+    });
+  }
+
+  create() {
+    this.petService.createPet(this.createForm.value).subscribe({
+      next: (_) => this.router.navigateByUrl('/pets'),
+      error: (error) => (this.validationErrors = error),
+    });
+  }
 
   cancel() {
-    this.cancelRegister.emit(false);
+    this.router.navigateByUrl('/pets');
   }
 }

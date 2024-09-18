@@ -7,7 +7,9 @@ using System.Threading.Tasks;
 namespace Pets.Contracts.Responses;
 public class ValidationFailureResponse
 {
-    public required IEnumerable<ValidationResponse> Errors { get; init; }
+    //public required IEnumerable<ValidationResponse> Errors { get; init; }
+
+    public required IEnumerable<string> Errors { get; init; }
 }
 
 public class ValidationResponse

@@ -55,19 +55,9 @@
         <td>{{ pet.microChipId }}</td>
         <td>{{ pet.ownerName }}</td>
         <td>{{ pet.missingSince | date : "longDate" }}</td>
-        <td>{{ pet.createdDate | date : "longDate" }}</td>
+        <td>{{ pet.createdDate | date : "medium" }}</td>
       </tr>
       }
-
-      <!--  <tr *ngFor="let pet of pets">
-      <td>{{ pet.name }}</td>
-      <td>{{ pet.species }}</td>
-      <td>{{ pet.birthdate | date }}</td>
-      <td>
-        <a [routerLink]="['/pets', pet.id]">View</a>
-        <a [routerLink]="['/pets', pet.id, 'edit']">Edit</a>
-      </td>
-    </tr> -->
     </tbody>
   </table>
 
