@@ -10,4 +10,6 @@ namespace Pets.Application.Interfaces;
 public interface IPetRepository : IGenericRepository<Pet>   
 {
     Task<IReadOnlyList<Pet>> ListAllWithOptionsAsync(GetAllPetsRequestOptions options, CancellationToken token = default);
+
+    Task<Pet?> GetByIdWithPetTypeAsync(int id, CancellationToken token = default);
 }

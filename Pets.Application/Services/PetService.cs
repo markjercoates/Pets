@@ -56,7 +56,7 @@ public class PetService : IPetService
 
     public async Task<PetResponse?> GetByIdAsync(int id, CancellationToken token = default)
     {
-        var pet = await _unitOfWork.PetRepository.GetByIdAsync(id, token);
+        var pet = await _unitOfWork.PetRepository.GetByIdWithPetTypeAsync(id, token);
 
         if (pet == null)
         {

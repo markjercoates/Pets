@@ -4,6 +4,7 @@ using Pets.API.Extensions;
 using Pets.API.Helpers;
 using Pets.Application.Interfaces;
 using Pets.Contracts.Requests;
+using Pets.Contracts.Responses;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -17,7 +18,7 @@ public class PetsController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get([FromRoute] int id, CancellationToken token = default)
+    public async Task<ActionResult<PetResponse>> Get([FromRoute] int id, CancellationToken token = default)
     {
         var response = await _petService.GetByIdAsync(id, token);
         if (response == null)
@@ -28,8 +29,8 @@ public class PetsController : ControllerBase
         return Ok(response);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAll([FromQuery] GetAllPetsRequestOptions options,
+    [HttpGet()]
+    public async Task<ActionResult<List<PetResponse>>> GetAll([FromQuery] GetAllPetsRequestOptions options,
             CancellationToken token = default)
     {
         var response = await _petService.GetAllAsync(options, token);
@@ -42,7 +43,7 @@ public class PetsController : ControllerBase
 
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] CreatePetRequest request, CancellationToken token = default)
+    public async Task<ActionResult<PetResponse>> Create([FromBody] CreatePetRequest request, CancellationToken token = default)
     {
         var response = await _petService.CreateAsync(request, token);
         if(response is null)
@@ -55,7 +56,7 @@ public class PetsController : ControllerBase
 
     [Authorize]
     [HttpPut("{id}")]
-    public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdatePetRequest request, CancellationToken token = default)
+    public async Task<ActionResult> Update([FromRoute] int id, [FromBody] UpdatePetRequest request, CancellationToken token = default)
     {
         var result = await _petService.UpdateAsync(id, request, token);
         if (!result)
@@ -68,7 +69,7 @@ public class PetsController : ControllerBase
 
     [Authorize]
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete([FromRoute]int id, CancellationToken token = default)
+    public async Task<ActionResult> Delete([FromRoute]int id, CancellationToken token = default)
     {
         var result = await _petService.DeleteAsync(id, token); 
         if(!result)

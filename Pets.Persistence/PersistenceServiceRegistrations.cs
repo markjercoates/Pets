@@ -23,14 +23,4 @@ public static class PersistenceServiceRegistrations
     }
 }
 
-//public static class DbContextOptionsBuilderExtensions
-//{
-//    public static DbContextOptionsBuilder UseLoggedInUserService(
-//        this DbContextOptionsBuilder optionsBuilder,
-//        ILoggedInUserService loggedInUserService)
-//    {
-//        // Assuming you have a way to set the loggedInUserService in the DbContext
-//        optionsBuilder.ReplaceService<ILoggedInUserService, LoggedInUserService>(loggedInUserService);
-//        return optionsBuilder;
-//    }
-//}
+

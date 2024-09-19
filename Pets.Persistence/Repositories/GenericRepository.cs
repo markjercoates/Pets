@@ -13,7 +13,7 @@ public abstract class GenericRepository<T> : IGenericRepository<T> where T : cla
         _dbContext = dbContext;
     }
 
-    public virtual async Task<T?> GetByIdAsync(int id, CancellationToken token = default)
+    public async Task<T?> GetByIdAsync(int id, CancellationToken token = default)
     {
         return await _dbContext.Set<T>().FindAsync(id, token);
     }

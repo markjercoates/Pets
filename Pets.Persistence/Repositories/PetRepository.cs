@@ -17,7 +17,7 @@ public class PetRepository : GenericRepository<Pet>, IPetRepository
     {
 
     }
-    public override async Task<Pet?> GetByIdAsync(int id, CancellationToken token = default)
+    public async Task<Pet?> GetByIdWithPetTypeAsync(int id, CancellationToken token = default)
     {
         return await _dbContext.Pets.Include(p => p.PetType)
                 .SingleOrDefaultAsync(p => p.Id == id, token);

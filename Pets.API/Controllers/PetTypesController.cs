@@ -4,6 +4,7 @@ using Pets.API.Extensions;
 using Pets.API.Helpers;
 using Pets.Application.Interfaces;
 using Pets.Application.Services;
+using Pets.Contracts.Responses;
 
 
 namespace Pets.API.Controllers;
@@ -20,7 +21,7 @@ public class PetTypesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAll(CancellationToken token = default)
+    public async Task<ActionResult<IEnumerable<PetTypeResponse>>> GetAll(CancellationToken token = default)
     {
         var response = await _petTypeService.GetAllAsync(token);
 
@@ -28,7 +29,7 @@ public class PetTypesController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> Get([FromRoute] int id, CancellationToken token = default)
+    public async Task<ActionResult<PetTypeResponse>> Get([FromRoute] int id, CancellationToken token = default)
     {
         var response = await _petTypeService.GetByIdAsync(id, token);
         if (response == null)
