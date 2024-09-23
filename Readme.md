@@ -37,21 +37,17 @@ So that I can raise awareness of a missing pet.
 
 - Bill needs this app live ASAP, so aim to spend only a couple of hours on this.
 
-### Running the app
-
-Ensure you have .net core 3.1 installed on your machine. If you're using Visual Studio 2019 then set one of the web projects as the startup project and hit run.
-
 ### Submission by Mark Coates
 
 I've removed all the existing projects and started from scratch.
 I've created a new .NET 8 WEB API Solution consisting of 6 projects:
 
-- PetsAlone.API
-- PetsAlone.Application
-- PetsAlone.Contracts
-- PetsAlone.Persistence
-- PetsAlone.UnitTests
-- PetsAlone.IntegrationTests
+- Pets.API
+- Pets.Application
+- Pets.Contracts
+- Pets.Persistence
+- Pets.UnitTests
+- Pets.IntegrationTests
 
 There is also an Angular v18 application in the client folder to display the UI.
 
