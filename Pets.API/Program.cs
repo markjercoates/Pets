@@ -28,6 +28,21 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 app.UseMiddleware<ExceptionMiddleware>();
 
+// Use NWebsec to set security headers
+app.UseXContentTypeOptions(); // Prevents content type sniffing
+app.UseReferrerPolicy(opts => opts.NoReferrer()); // No referrer data is sent
+app.UseXXssProtection(options => options.EnabledWithBlockMode()); // Enables the XSS filter in the browser
+app.UseXfo(options => options.Deny()); // Prevents clickjacking
+/*app.UseCsp(opts => opts
+    .BlockAllMixedContent()
+    .StyleSources(s => s.Self())
+    .FontSources(s => s.Self())
+    .FormActions(s => s.Self())
+    .FrameAncestors(s => s.Self())
+    .ImageSources(s => s.Self())
+    .ScriptSources(s => s.Self())
+);*/
+
 app.UseCors(x => x.AllowAnyHeader()
                         .AllowAnyMethod()
                         .WithOrigins("http://localhost:4200", "https://localhost:4200"));
