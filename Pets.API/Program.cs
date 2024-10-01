@@ -37,6 +37,24 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    //using var scope = app.Services.CreateScope();
+    //var services = scope.ServiceProvider;
+    //try
+    //{
+    //    var context = services.GetRequiredService<PetsDbContext>();
+    //    var userManager = services.GetRequiredService<UserManager<AppUser>>();
+    //    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
+    //    //await context.Database.EnsureDeletedAsync();
+    //    await context.Database.MigrateAsync();
+    //    await Seed.SeedUsers(userManager, roleManager);
+    //    await Seed.SeedTestData(context);
+    //}
+    //catch (Exception ex)
+    //{
+    //    var logger = services.GetService<ILogger<Program>>();
+    //    logger?.LogError(ex, "An error occurred during migration");
+    //}
 }
 
 app.UseHttpsRedirection();
@@ -44,24 +62,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
-//using var scope = app.Services.CreateScope();
-//var services = scope.ServiceProvider;
-//try
-//{
-//    var context = services.GetRequiredService<PetsDbContext>();
-//    var userManager = services.GetRequiredService<UserManager<AppUser>>();
-//    var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
-//    //await context.Database.EnsureDeletedAsync();
-//    await context.Database.MigrateAsync();
-//    await Seed.SeedUsers(userManager, roleManager);
-//    await Seed.SeedTestData(context);
-//}
-//catch (Exception ex)
-//{
-//    var logger = services.GetService<ILogger<Program>>();
-//    logger?.LogError(ex, "An error occurred during migration");
-//}
 
 app.Run();
 
